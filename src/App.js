@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useMoralis } from "react-moralis";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Auth from "./components/Auth";
 
-function App() {
+import SignUp from "./components/SignUp";
+import Home from "./Home";
+
+const App = () => {
+  const { signup, isAuthenticating, authError, isAuthenticated } = useMoralis();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="signup"
+          element={
+            <SignUp
+              signup={signup}
+              loading={isAuthenticating}
+              authError={authError}
+              isAuthenticated={isAuthenticated}
+            />
+          }
+        />
+        <Route
+          path="login"
+          element={
+            <Auth
+              signup={signup}
+              loading={isAuthenticating}
+              authError={authError}
+              isAuthenticated={isAuthenticated}
+            />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
