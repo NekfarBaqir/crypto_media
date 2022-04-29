@@ -13,8 +13,8 @@ const theme = extendTheme({
   },
 });
 
-const serverURL = "https://vsy2d8mc85ja.usemoralis.com:2053/server";
-const appId = "13EbrYaXeOXHgWWMxZvGSi4YMTjghvlDVsRuB3YR";
+const serverURL = process.env.REACT_APP_SERVER_URL;
+const appId = process.env.REACT_APP_APP_ID;
 root.render(
   <React.StrictMode>
     <MoralisProvider serverUrl={serverURL} appId={appId}>
